@@ -1,0 +1,95 @@
+package DialogFragment
+
+import API.ApiClient
+import API.UserInterface
+import Models.login
+import Models.user
+import android.app.Activity
+import android.content.Context
+import android.content.SharedPreferences
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.os.Bundle
+import android.support.v4.app.DialogFragment
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.view.Window
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ProgressBar
+import android.widget.Toast
+import com.example.fingeringpiano.MainActivity
+import com.example.fingeringpiano.R
+import retrofit2.Call
+import retrofit2.Response
+
+
+class LoginDialog: DialogFragment() {
+    var apiInterface =ApiClient().getApiClient().create(UserInterface::class.java)
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val v = inflater.inflate(R.layout.dialog_login, container)
+
+        //make dialog fragment rounded and transparent
+        if (getDialog() != null && getDialog().getWindow() != null) {
+            getDialog().getWindow().setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+            getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        }
+
+        val email_etxt = v.findViewById(R.id.email_etxt) as EditText
+        val password_etxt = v.findViewById(R.id.password_etxt) as EditText
+
+        email_etxt.setSelection(0)
+        password_etxt.setSelection(0)
+
+        email_etxt.setText("student@app.com")
+        password_etxt.setText("password")
+
+        val login_btn = v.findViewById<Button>(R.id.login_btn)
+        login_btn!!.setOnClickListener {
+            Log.d("login_btn", "clicked")
+            Log.d("email", email_etxt.text.toString())
+
+            val call =apiInterface.loginUser(email_etxt.text.toString(), password_etxt.text.toString())
+            call.enqueue(object: retrofit2.Callback<login>{
+                override fun onFailure(call: Call<login>, t: Throwable) {
+                    Toast.makeText(context, t.message, Toast.LENGTH_LONG).show()
+                    Log.e("onFailure", t.message)
+                }
+
+                override fun onResponse(call: Call<login>, response: Response<login>) {
+                    if(response.isSuccessful) {
+                        Toast.makeText(context, "Login sebagai " + response.body()?.role, Toast.LENGTH_LONG).show()
+                        Log.d("success", response.body()!!.access_token.length.toString())
+
+                        //inserting to shared preferences
+                        var sp  = activity?.getSharedPreferences("login", Context.MODE_PRIVATE)
+                        var ed :SharedPreferences.Editor = sp!!.edit()
+                        ed.putString("token", response.body()!!.access_token)
+                        ed.apply()
+
+                        (activity as MainActivity).onDialogResult()
+
+                        dismiss()
+                    }
+                    else {
+                        Toast.makeText(context, response.message(), Toast.LENGTH_LONG).show()
+                        Log.e("isFailure", response.toString())
+                    }
+                }
+            })
+        }
+
+        return v
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+    }
+
+    override fun onResume() {
+        super.onResume()
+    }
+}

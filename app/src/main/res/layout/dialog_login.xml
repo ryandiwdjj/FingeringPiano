@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/rounded_dialog"
+              android:padding="@dimen/padding_menu">
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="vertical">
+
+        <EditText android:id="@+id/email_etxt"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:background="@drawable/rounded_border"
+                  android:padding="@dimen/padding_edit_text"
+                  android:hint="Email"/>
+
+        <EditText android:id="@+id/password_etxt"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:background="@drawable/rounded_border"
+                  android:padding="@dimen/padding_edit_text"
+                  android:layout_marginTop="10dp"
+                  android:hint="Kata Sandi"/>
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content" android:padding="@dimen/padding_menu"
+                      android:gravity="center">
+
+            <Button android:id="@+id/login_btn"
+                    android:layout_width="@dimen/button_size"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_border"
+                    android:backgroundTint="@color/trueBlue"
+                    android:text="Masuk"/>
+
+            <Button android:id="@+id/register_btn"
+                    android:layout_width="@dimen/button_size"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_border"
+                    android:backgroundTint="@color/trueRed"
+                    android:layout_marginStart="50dp"
+                    android:text="Daftar"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

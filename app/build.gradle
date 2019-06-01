@@ -47,4 +47,7 @@ dependencies {
 
     //image processing Picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
+
+    //loading animation
+    implementation 'com.github.ybq:Android-SpinKit:1.2.0'
 }
