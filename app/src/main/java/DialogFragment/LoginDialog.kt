@@ -16,12 +16,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ProgressBar
-import android.widget.Toast
+import android.widget.*
 import com.example.fingeringpiano.MainActivity
 import com.example.fingeringpiano.R
+import com.github.ybq.android.spinkit.SpinKitView
+import kotlinx.android.synthetic.main.dialog_login.*
+import kotlinx.android.synthetic.main.dialog_login.view.*
 import retrofit2.Call
 import retrofit2.Response
 
@@ -40,17 +40,28 @@ class LoginDialog: DialogFragment() {
 
         val email_etxt = v.findViewById(R.id.email_etxt) as EditText
         val password_etxt = v.findViewById(R.id.password_etxt) as EditText
+        val spin_kit = v.findViewById<SpinKitView>(R.id.spin_kit)
 
-        email_etxt.setSelection(0)
-        password_etxt.setSelection(0)
+        spin_kit.visibility = View.INVISIBLE
+
+
 
         email_etxt.setText("student@app.com")
         password_etxt.setText("password")
+
 
         val login_btn = v.findViewById<Button>(R.id.login_btn)
         login_btn!!.setOnClickListener {
             Log.d("login_btn", "clicked")
             Log.d("email", email_etxt.text.toString())
+
+            email_etxt.isEnabled = false
+            password_etxt.isEnabled = false
+            login_btn.isEnabled = false
+            register_btn.isEnabled = false
+
+            spin_kit.visibility = View.VISIBLE
+
 
             val call =apiInterface.loginUser(email_etxt.text.toString(), password_etxt.text.toString())
             call.enqueue(object: retrofit2.Callback<login>{
@@ -80,16 +91,15 @@ class LoginDialog: DialogFragment() {
                     }
                 }
             })
+
         }
 
         return v
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-    }
-
     override fun onResume() {
+        dialog?.window?.setLayout((LinearLayout.LayoutParams.MATCH_PARENT + 1250), (LinearLayout.LayoutParams.MATCH_PARENT + 1000))
+
         super.onResume()
     }
 }
