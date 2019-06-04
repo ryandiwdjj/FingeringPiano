@@ -12,7 +12,7 @@ interface UserInterface {
 
     //Login user
     @FormUrlEncoded
-    @POST("auth/login/")
+    @POST("auth/login")
     fun loginUser(@Field("email") email: String,
                     @Field("password") password: String): Call<login>
 

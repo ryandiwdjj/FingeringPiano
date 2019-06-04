@@ -41,16 +41,16 @@ class LoginDialog: DialogFragment() {
         val email_etxt = v.findViewById(R.id.email_etxt) as EditText
         val password_etxt = v.findViewById(R.id.password_etxt) as EditText
         val spin_kit = v.findViewById<SpinKitView>(R.id.spin_kit)
+        val login_btn = v.findViewById<Button>(R.id.login_btn)
+        val regis_btn = v.findViewById<Button>(R.id.register_btn)
 
         spin_kit.visibility = View.INVISIBLE
-
-
 
         email_etxt.setText("student@app.com")
         password_etxt.setText("password")
 
 
-        val login_btn = v.findViewById<Button>(R.id.login_btn)
+
         login_btn!!.setOnClickListener {
             Log.d("login_btn", "clicked")
             Log.d("email", email_etxt.text.toString())
@@ -58,7 +58,8 @@ class LoginDialog: DialogFragment() {
             email_etxt.isEnabled = false
             password_etxt.isEnabled = false
             login_btn.isEnabled = false
-            register_btn.isEnabled = false
+            regis_btn.isEnabled = false
+            isCancelable = false
 
             spin_kit.visibility = View.VISIBLE
 
@@ -68,6 +69,12 @@ class LoginDialog: DialogFragment() {
                 override fun onFailure(call: Call<login>, t: Throwable) {
                     Toast.makeText(context, t.message, Toast.LENGTH_LONG).show()
                     Log.e("onFailure", t.message)
+
+                    email_etxt.isEnabled = true
+                    password_etxt.isEnabled = true
+                    login_btn.isEnabled = true
+                    regis_btn.isEnabled = true
+                    isCancelable = true
                 }
 
                 override fun onResponse(call: Call<login>, response: Response<login>) {
@@ -88,7 +95,15 @@ class LoginDialog: DialogFragment() {
                     else {
                         Toast.makeText(context, response.message(), Toast.LENGTH_LONG).show()
                         Log.e("isFailure", response.toString())
+
+                        spin_kit.visibility = View.INVISIBLE
                     }
+
+                    email_etxt.isEnabled = true
+                    password_etxt.isEnabled = true
+                    login_btn.isEnabled = true
+                    regis_btn.isEnabled = true
+                    isCancelable = true
                 }
             })
 

@@ -64,12 +64,26 @@
                 android:tint="@color/white"
                 android:layout_marginStart="0dp"/>
     </LinearLayout>
-    <!--<android.support.v7.widget.RecyclerView-->
-    <!--android:id="@+id/recycler_video"-->
-    <!--android:orientation="horizontal"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content">-->
 
-    <!--</android.support.v7.widget.RecyclerView>-->
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
 
+        <Button
+                android:id="@+id/video_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Video"/>
+        <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:id="@+id/recycler_video"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+
+        <!--</android.support.v7.widget.RecyclerView>-->
+    </LinearLayout>
 </LinearLayout>

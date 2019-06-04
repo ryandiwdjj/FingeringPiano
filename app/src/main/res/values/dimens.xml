@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="padding_menu">30dp</dimen>
-    <dimen name="icon_size">40dp</dimen>
+    <dimen name="icon_size">50dp</dimen>
     <dimen name="button_size">100dp</dimen>
     <dimen name="padding_edit_text">10dp</dimen>
 </resources>

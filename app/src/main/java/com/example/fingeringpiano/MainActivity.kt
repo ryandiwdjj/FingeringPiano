@@ -49,7 +49,13 @@ class MainActivity : AppCompatActivity() {
 
         val search_btn = findViewById<ImageButton>(R.id.search_btn)
         search_btn.setOnClickListener{
-            Toast.makeText(applicationContext, "Search Button Pressed", Toast.LENGTH_LONG).show()
+//            Toast.makeText(applicationContext, "Search Button Pressed", Toast.LENGTH_LONG).show()
+            startActivity(Intent(this, SearchActivity::class.java))
+        }
+
+        val video_btn = findViewById<Button>(R.id.video_btn)
+        video_btn.setOnClickListener {
+            startActivity(Intent(this, VideoActivity::class.java))
         }
     }
 
