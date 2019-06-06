@@ -31,26 +31,27 @@
                 android:orientation="horizontal"
                 android:layout_toEndOf="@+id/user_btn">
 
-            <ImageButton
-                    android:layout_width="@dimen/icon_size"
-                    android:layout_height="@dimen/icon_size"
-                    android:scaleType="fitCenter"
-                    android:background="@null"
-                    android:src="@drawable/ic_notes_green"/>
-            <ImageButton
-                    android:layout_marginLeft="20dp"
-                    android:layout_width="@dimen/icon_size"
-                    android:layout_height="@dimen/icon_size"
-                    android:background="@null"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_notes_yellow"/>
-            <ImageButton
-                    android:layout_marginLeft="20dp"
-                    android:layout_width="@dimen/icon_size"
-                    android:layout_height="@dimen/icon_size"
-                    android:background="@null"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_notes_red"/>
+
+            <!--<ImageButton-->
+            <!--android:layout_width="@dimen/icon_size"-->
+            <!--android:layout_height="@dimen/icon_size"-->
+            <!--android:scaleType="fitCenter"-->
+            <!--android:background="@null"-->
+            <!--android:src="@drawable/ic_notes_green"/>-->
+            <!--<ImageButton-->
+            <!--android:layout_marginLeft="20dp"-->
+            <!--android:layout_width="@dimen/icon_size"-->
+            <!--android:layout_height="@dimen/icon_size"-->
+            <!--android:background="@null"-->
+            <!--android:scaleType="fitCenter"-->
+            <!--android:src="@drawable/ic_notes_yellow"/>-->
+            <!--<ImageButton-->
+            <!--android:layout_marginLeft="20dp"-->
+            <!--android:layout_width="@dimen/icon_size"-->
+            <!--android:layout_height="@dimen/icon_size"-->
+            <!--android:background="@null"-->
+            <!--android:scaleType="fitCenter"-->
+            <!--android:src="@drawable/ic_notes_red"/>-->
 
         </LinearLayout>
 
@@ -71,19 +72,13 @@
             android:gravity="center"
             android:orientation="vertical">
 
-        <Button
-                android:id="@+id/video_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="Video"/>
-        <!--<android.support.v7.widget.RecyclerView-->
-        <!--android:id="@+id/recycler_video"-->
-        <!--android:orientation="horizontal"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content">-->
+        <android.support.v7.widget.RecyclerView
+                android:id="@+id/video_recycler"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <!--</android.support.v7.widget.RecyclerView>-->
+        </android.support.v7.widget.RecyclerView>
+
     </LinearLayout>
 </LinearLayout>

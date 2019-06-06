@@ -19,6 +19,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Email"
-            app:met_floatingLabel="normal" />
+            app:met_floatingLabel="normal"/>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:padding="20dp"
+                  android:gravity="center">
+
+        <Button android:id="@+id/logout_btn"
+                android:layout_width="@dimen/button_size"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Log out"/>
+
+    </LinearLayout>
 
 </LinearLayout>

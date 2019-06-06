@@ -16,7 +16,7 @@ class VideoActivity : AppCompatActivity() {
 
         var video_view = findViewById<VideoView>(R.id.video_view)
 
-        var uri = Uri.parse("https://drive.google.com/open?id=1lUCoxoFPVFuhfpt80JK9RH-6gvEo6hzL")
+        var uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.video)
         video_view.setVideoURI(uri)
 
         var mediaController = MediaController(this)

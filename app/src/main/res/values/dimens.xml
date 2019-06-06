@@ -3,5 +3,5 @@
     <dimen name="padding_menu">30dp</dimen>
     <dimen name="icon_size">50dp</dimen>
     <dimen name="button_size">100dp</dimen>
-    <dimen name="padding_edit_text">10dp</dimen>
+    <dimen name="padding_edit_text">5dp</dimen>
 </resources>
