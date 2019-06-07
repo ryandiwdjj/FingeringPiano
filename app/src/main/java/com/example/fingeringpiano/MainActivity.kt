@@ -29,7 +29,7 @@ import org.json.JSONObject
 class MainActivity : AppCompatActivity() {
     var fm = supportFragmentManager
     var video_list  = ArrayList<video>()
-    var apiInterface = ApiClient().getApiClient().create(VideoInterface::class.java)
+    var apiInterface = ApiClient.getApiClient().create(VideoInterface::class.java)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
 
         var category_list = arrayListOf("Semua")
 
-        var category_spinner = findViewById(R.id.category_spinner) as Spinner
+        var category_spinner = findViewById<Spinner>(R.id.category_spinner)
         var call_cat = apiInterface.indexCategory("bearer" + sp.getString("token", null))
         call_cat.enqueue(object : Callback<ArrayList<category>>{
             override fun onFailure(call: Call<ArrayList<category>>, t: Throwable) {
@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
-        category_spinner.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, category_list)
+        category_spinner.adapter = ArrayAdapter(this, R.layout.spinner_item, category_list)
         category_spinner.gravity = Gravity.CENTER
         category_spinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -87,7 +87,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 Log.d("onItemSelected spinner", "clicked")
-                Toast.makeText(this@MainActivity, category_list.get(position), Toast.LENGTH_LONG).show()
+                //Toast.makeText(this@MainActivity, category_list.get(position), Toast.LENGTH_LONG).show()
             }
         }
 
@@ -100,9 +100,9 @@ class MainActivity : AppCompatActivity() {
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         var video_recycler = findViewById<RecyclerView>(R.id.video_recycler)
-        video_recycler.setLayoutManager(LinearLayoutManager(applicationContext))
-        video_recycler.setItemAnimator(DefaultItemAnimator())
-        video_recycler.setAdapter(VideoAdapter(video_list, applicationContext))
+        video_recycler.layoutManager = LinearLayoutManager(applicationContext)
+        video_recycler.itemAnimator = DefaultItemAnimator()
+        video_recycler.adapter = VideoAdapter(video_list, applicationContext)
 
         var token = "bearer" + sp.getString("token", null)
         Log.d("tag", token)
@@ -119,7 +119,8 @@ class MainActivity : AppCompatActivity() {
                     video_list = response.body() as ArrayList<video>
                     Log.d("isSuccessful", video_list.toString())
 
-                    video_recycler.layoutManager = LinearLayoutManager(this@MainActivity)
+//                    video_recycler.layoutManager = LinearLayoutManager(this@MainActivity)
+                    video_recycler.layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.HORIZONTAL, false)
                     video_recycler.adapter = VideoAdapter(video_list, applicationContext)
                 }
                 else {

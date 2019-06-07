@@ -23,7 +23,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        var apiInterface = ApiClient().getApiClient().create(UserInterface::class.java)
+        var apiInterface = ApiClient.getApiClient().create(UserInterface::class.java)
 
         val email_etxt = findViewById(R.id.email_etxt) as EditText
         val password_etxt = findViewById(R.id.password_etxt) as EditText

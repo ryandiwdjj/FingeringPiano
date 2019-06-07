@@ -11,7 +11,7 @@ import android.widget.EditText
 import android.widget.Toast
 
 class RegisterActivity : AppCompatActivity() {
-    var apiInterface = ApiClient().getApiClient().create(UserInterface::class.java)
+    var apiInterface = ApiClient.getApiClient().create(UserInterface::class.java)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

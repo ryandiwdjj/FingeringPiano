@@ -14,6 +14,6 @@ interface VideoInterface {
     fun indexVideo(@Header("Authorization") authHeader: String) : Call<ArrayList<video>>
 
     //get all category
-    @GET("video/")
+    @GET("category/")
     fun indexCategory(@Header("Authorization") authHeader: String) : Call<ArrayList<category>>
 }

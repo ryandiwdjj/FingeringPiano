@@ -29,7 +29,7 @@ import retrofit2.Response
 class DetailUserDialog : DialogFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.dialog_detailuser, container)
-        var apiInterface = ApiClient().getApiClient().create(UserInterface::class.java)
+        var apiInterface = ApiClient.getApiClient().create(UserInterface::class.java)
 
         //make dialog fragment rounded and transparent
         if (getDialog() != null && getDialog().getWindow() != null) {

@@ -1,20 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:padding="@dimen/padding_menu">
+              android:padding="10dp"
+              android:background="@color/white"
+              android:orientation="vertical">
 
-    <!--<ImageView android:id="@+id/video_thumb_pict"-->
-               <!--android:layout_width="100dp"-->
-               <!--android:layout_height="100dp"-->
-               <!--android:layout_gravity="center"-->
-               <!--android:src="@drawable/ic_notes_black"/>-->
+    <ImageView android:id="@+id/video_thumb_pict"
+               android:layout_width="125dp"
+               android:layout_height="125dp"
+               android:layout_gravity="center"
+               android:src="@drawable/ic_notes_black"/>
+
 
     <TextView android:id="@+id/video_name_txt"
+              android:padding="15dp"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              android:textSize="15dp"
               android:gravity="center"
               android:text="Nama Video"/>
+
+    <ImageView android:id="@+id/line"
+            android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:background="@color/white"/>
 
 </LinearLayout>

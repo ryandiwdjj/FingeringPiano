@@ -4,8 +4,12 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class ApiClient (){
+object ApiClient{
     private val BASE_URL: String = "http://fingeringapi.thekingcorp.org/"
+
+    fun getThumbnail(): String {
+        return BASE_URL + "images/thumbnails/"
+    }
 
     fun getApiClient(): Retrofit {
         val retrofit = Retrofit.Builder()
