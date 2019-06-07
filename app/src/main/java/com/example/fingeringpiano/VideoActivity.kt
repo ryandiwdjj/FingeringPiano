@@ -14,9 +14,11 @@ class VideoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_video)
 
+        var url = intent.getStringExtra("video")
+
         var video_view = findViewById<VideoView>(R.id.video_view)
 
-        var uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.video)
+        var uri = Uri.parse(url)
         video_view.setVideoURI(uri)
 
         var mediaController = MediaController(this)

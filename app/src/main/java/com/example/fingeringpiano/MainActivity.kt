@@ -10,6 +10,8 @@ import android.os.Bundle
 import android.util.Log
 import Models.video
 import RecyclerAdapter.VideoAdapter
+import RecyclerAdapter.addOnItemClickListener
+import RecyclerAdapter.onItemClickListener
 import android.content.Context
 import android.content.Intent
 import android.nfc.Tag
@@ -129,5 +131,17 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+        video_recycler.addOnItemClickListener(object: onItemClickListener {
+            override fun onItemClicked(position: Int, view: View) {
+                // Your logic
+                Log.d("recycler clicked", video_list.get(position).name)
+
+                var i = Intent(this@MainActivity, VideoActivity::class.java)
+                i.putExtra("video", video_list.get(position).fileUrl)
+
+                startActivity(i)
+            }
+        })
     }
 }
+

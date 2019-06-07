@@ -17,6 +17,9 @@ import com.squareup.picasso.Picasso
 
 class VideoAdapter(private val items: List<video>, val context: Context) : RecyclerView.Adapter<ViewHolder>() {
 
+    var onItemClick: ((video) -> Unit)? = null
+    var videos: List<video> = emptyList()
+
     override fun onCreateViewHolder(viewGroup: ViewGroup, p1: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(context).inflate(R.layout.recycler_video, viewGroup, false))
     }
@@ -51,4 +54,5 @@ class ViewHolder (view: View) : RecyclerView.ViewHolder(view) {
             Picasso.get().load(R.color.trueRed).into(garis)
         }
     }
+
 }
