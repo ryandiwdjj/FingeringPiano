@@ -36,6 +36,7 @@
             <EditText android:id="@+id/search_etxt"
                     android:layout_width="300dp"
                       android:layout_height="wrap_content"
+                      android:imeOptions="flagNoExtractUi"
                       android:gravity="center"
                       android:hint="Cari di sini"/>
 
@@ -46,17 +47,24 @@
                 android:layout_width="@dimen/icon_size"
                 android:layout_height="@dimen/icon_size"
                 android:src="@drawable/ic_search"
-                android:background="@drawable/rounded_border"
+                android:background="@drawable/ripple_effect"
                 android:backgroundTint="@color/trueBlue"
                 android:tint="@color/white"
                 android:layout_marginStart="0dp"/>
     </LinearLayout>
-    <!--<android.support.v7.widget.RecyclerView-->
-    <!--android:id="@+id/recycler_video"-->
-    <!--android:orientation="horizontal"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content">-->
 
-    <!--</android.support.v7.widget.RecyclerView>-->
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+        <android.support.v7.widget.RecyclerView
+                android:id="@+id/video_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+        </android.support.v7.widget.RecyclerView>
+
+    </LinearLayout>
 
 </LinearLayout>

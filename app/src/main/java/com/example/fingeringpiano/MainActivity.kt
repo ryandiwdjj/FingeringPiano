@@ -24,6 +24,7 @@ import android.support.v7.widget.DefaultItemAnimator
 import android.view.Gravity
 import android.view.View
 import android.widget.*
+import com.github.ybq.android.spinkit.SpinKitView
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -32,10 +33,15 @@ class MainActivity : AppCompatActivity() {
     var fm = supportFragmentManager
     var video_list  = ArrayList<video>()
     var apiInterface = ApiClient.getApiClient().create(VideoInterface::class.java)
+    var video_recycler = findViewById<RecyclerView>(R.id.video_recycler)
+    var video_adapter = VideoAdapter(video_list, applicationContext)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        var spinkit = findViewById<SpinKitView>(R.id.spin_kit)
+        spinkit.visibility = View.VISIBLE
 
         //login token handler
         var login_token = "null"
@@ -90,6 +96,14 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 Log.d("onItemSelected spinner", "clicked")
                 //Toast.makeText(this@MainActivity, category_list.get(position), Toast.LENGTH_LONG).show()
+                if(position == 0) {
+
+                }
+                else {
+                    video_adapter.categoryFilter().filter(category_list.get((position)))
+                    video_recycler.layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.HORIZONTAL, false)
+                    video_recycler.adapter = video_adapter
+                }
             }
         }
 
@@ -112,10 +126,12 @@ class MainActivity : AppCompatActivity() {
         var call = apiInterface.indexVideo(token)
         call.enqueue(object: Callback<ArrayList<video>> {
             override fun onFailure(call: Call<ArrayList<video>>, t: Throwable) {
+                spinkit.visibility = View.INVISIBLE
                 Log.e("onFailure", t.message)
             }
 
             override fun onResponse(call: Call<ArrayList<video>>, response: Response<ArrayList<video>>) {
+                spinkit.visibility = View.INVISIBLE
                 if (response.isSuccessful) {
 
                     video_list = response.body() as ArrayList<video>

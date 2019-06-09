@@ -3,12 +3,13 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="lightBlue">#5b97f7</color>
-    <color name="trueBlue">#0000FF</color>
-    <color name="trueRed">#FF0000</color>
-    <color name="trueGreen">#00FF00</color>
+    <!--<color name="lightBlue">#5b97f7</color>-->
+    <color name="trueBlue">#ff4b4bFF</color>
+    <color name="trueRed">#ff4b4b</color>
+    <color name="trueGreen">#4bFF4b</color>
     <color name="trueYellow">#FFFF00</color>
-    <color name="white">#FFFFFF</color>
+    <color name="white">#f5f5f5</color>
     <color name="black">#000000</color>
+    <color name="broken_white">#DDD</color>
 
 </resources>
