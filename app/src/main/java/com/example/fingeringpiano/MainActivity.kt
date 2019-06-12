@@ -30,23 +30,23 @@ import org.json.JSONObject
 
 
 class MainActivity : AppCompatActivity() {
-    var fm = supportFragmentManager
-    var video_list  = ArrayList<video>()
-    var apiInterface = ApiClient.getApiClient().create(VideoInterface::class.java)
-    var video_recycler = findViewById<RecyclerView>(R.id.video_recycler)
-    var video_adapter = VideoAdapter(video_list, applicationContext)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var spinkit = findViewById<SpinKitView>(R.id.spin_kit)
+        var fm = supportFragmentManager
+        var video_list  = ArrayList<video>()
+        var apiInterface = ApiClient.getApiClient().create(VideoInterface::class.java)
+        var video_recycler = findViewById<RecyclerView>(R.id.video_recycler)
+        var video_adapter = VideoAdapter(video_list, applicationContext)
+
+        var spinkit = findViewById<View>(R.id.spin_kit)
         spinkit.visibility = View.VISIBLE
 
         //login token handler
         var login_token = "null"
         var sp  = getSharedPreferences("login", Context.MODE_PRIVATE)
-        var videoAdapter : VideoAdapter
 
         var user_btn = findViewById<ImageButton>(R.id.user_btn)
         user_btn.setOnClickListener {
@@ -86,36 +86,16 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
-        category_spinner.adapter = ArrayAdapter(this, R.layout.spinner_item, category_list)
-        category_spinner.gravity = Gravity.CENTER
-        category_spinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-
-            }
-
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                Log.d("onItemSelected spinner", "clicked")
-                //Toast.makeText(this@MainActivity, category_list.get(position), Toast.LENGTH_LONG).show()
-                if(position == 0) {
-
-                }
-                else {
-                    video_adapter.categoryFilter().filter(category_list.get((position)))
-                    video_recycler.layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.HORIZONTAL, false)
-                    video_recycler.adapter = video_adapter
-                }
-            }
-        }
 
         var search_btn = findViewById<ImageButton>(R.id.search_btn)
         search_btn.setOnClickListener{
-//            Toast.makeText(applicationContext, "Search Button Pressed", Toast.LENGTH_LONG).show()
+            //            Toast.makeText(applicationContext, "Search Button Pressed", Toast.LENGTH_LONG).show()
             startActivity(Intent(this, SearchActivity::class.java))
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        var video_recycler = findViewById<RecyclerView>(R.id.video_recycler)
+        //var video_recycler = findViewById<RecyclerView>(R.id.video_recycler)
         video_recycler.layoutManager = LinearLayoutManager(applicationContext)
         video_recycler.itemAnimator = DefaultItemAnimator()
         video_recycler.adapter = VideoAdapter(video_list, applicationContext)
@@ -158,6 +138,33 @@ class MainActivity : AppCompatActivity() {
                 startActivity(i)
             }
         })
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////
+
+        category_spinner.adapter = ArrayAdapter(this, R.layout.spinner_item, category_list)
+        category_spinner.gravity = Gravity.CENTER
+        category_spinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                Log.d("onItemSelected spinner", category_list.get((position)))
+                //Toast.makeText(this@MainActivity, category_list.get(position), Toast.LENGTH_LONG).show()
+
+                if(position == 0) {
+                    video_recycler.layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.HORIZONTAL, false)
+                    video_recycler.adapter = VideoAdapter(video_list, applicationContext)
+                }
+                else {
+                    video_adapter = VideoAdapter(video_list, applicationContext)
+                    video_adapter.categoryFilter().filter(category_list.get((position)))
+
+                    video_recycler.layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.HORIZONTAL, false)
+                    video_recycler.adapter = video_adapter
+                }
+            }
+        }
     }
 }
 

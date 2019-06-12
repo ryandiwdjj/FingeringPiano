@@ -1,38 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:orientation="vertical"
-              android:padding="@dimen/padding_menu"
-              android:background="@drawable/rounded_border"
-              android:backgroundTint="@color/broken_white"
-              android:gravity="center"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
-
-    <ImageView android:layout_width="50dp"
-               android:layout_height="50dp"
-               android:src="@drawable/ic_user"
-               android:backgroundTint="@color/white"
-               android:background="@drawable/rounded_border"/>
-
-    <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/email_etxt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Email"
-            app:met_floatingLabel="normal"/>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:padding="@dimen/padding_menu"
+                android:background="@drawable/rounded_border"
+                android:backgroundTint="@color/broken_white"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
     <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:padding="20dp"
+                  android:layout_height="match_parent"
+                  android:orientation="vertical"
                   android:gravity="center">
 
-        <Button android:id="@+id/logout_btn"
-                android:layout_width="@dimen/button_size"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Log out"/>
+        <ImageView android:layout_width="50dp"
+                   android:layout_height="50dp"
+                   android:src="@drawable/ic_user"
+                   android:backgroundTint="@color/white"
+                   android:background="@drawable/rounded_border"/>
 
+        <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/name_etxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Name"
+                app:met_floatingLabel="normal"/>
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/email_etxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email"
+                app:met_floatingLabel="normal"/>
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:padding="20dp"
+                      android:gravity="center">
+
+            <Button android:id="@+id/logout_btn"
+                    android:layout_width="@dimen/button_size"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Log out"/>
+
+        </LinearLayout>
     </LinearLayout>
 
-</LinearLayout>
+    <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/spin_kit"
+            style="@style/SpinKitView.Small.Wave"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center|center_horizontal"
+            app:SpinKit_Color="@color/colorAccent"/>
+
+</RelativeLayout>

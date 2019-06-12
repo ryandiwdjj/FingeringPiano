@@ -23,6 +23,7 @@ import android.widget.Toast
 import com.example.fingeringpiano.LandingPage
 import com.example.fingeringpiano.LoginActivity
 import com.example.fingeringpiano.R
+import kotlinx.android.synthetic.main.dialog_detailuser.*
 import retrofit2.Call
 import retrofit2.Response
 
@@ -30,6 +31,8 @@ class DetailUserDialog : DialogFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.dialog_detailuser, container)
         var apiInterface = ApiClient.getApiClient().create(UserInterface::class.java)
+        var spinkit = v.findViewById<View>(R.id.spin_kit)
+        spinkit.visibility = View.VISIBLE
 
         //make dialog fragment rounded and transparent
         if (getDialog() != null && getDialog().getWindow() != null) {
@@ -38,6 +41,9 @@ class DetailUserDialog : DialogFragment() {
         }
 
         var email_etxt = v.findViewById(R.id.email_etxt) as EditText
+        var name_etxt = v.findViewById(R.id.name_etxt) as EditText
+        email_etxt.isEnabled = false
+        name_etxt.isEnabled = false
 
         //login token handler
         var login_token: String = "null"
@@ -51,17 +57,24 @@ class DetailUserDialog : DialogFragment() {
         call.enqueue(object: retrofit2.Callback<user> {
             override fun onFailure(call: Call<user>, t: Throwable) {
                 Log.d("onFailure", t.message.toString())
+
+                Toast.makeText(context, t.toString(), Toast.LENGTH_LONG).show()
+                spinkit.visibility = View.INVISIBLE
             }
 
             override fun onResponse(call: Call<user>, response: Response<user>) {
                 Log.d("onResponse", response.message().toString())
+                spinkit.visibility = View.INVISIBLE
 
-                email_etxt.setText(response.body()?.email)
+                if(response.isSuccessful){
+                    name_etxt.setText(response.body()?.name)
+                    email_etxt.setText(response.body()?.email)
+                }
+                else {
+                    Toast.makeText(context, response.message(), Toast.LENGTH_LONG).show()
+                }
             }
         })
-
-
-        email_etxt.isEnabled = false
 
         var logout_btn = v.findViewById<Button>(R.id.logout_btn)
         logout_btn.setOnClickListener {

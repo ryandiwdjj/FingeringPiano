@@ -14,6 +14,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageButton
 import retrofit2.Call
@@ -35,6 +36,9 @@ class SearchActivity : AppCompatActivity() {
         var video_list  = ArrayList<video>()
         var video_adapter = VideoAdapter(video_list, applicationContext)
 
+        var spinkit = findViewById<View>(R.id.spin_kit)
+        spinkit.visibility = View.VISIBLE
+
         //video_recycler.layoutManager = LinearLayoutManager(applicationContext)
         //video_recycler.itemAnimator = DefaultItemAnimator()
         //video_recycler.adapter = video_adapter
@@ -51,11 +55,12 @@ class SearchActivity : AppCompatActivity() {
         call.enqueue(object: Callback<ArrayList<video>> {
             override fun onFailure(call: Call<ArrayList<video>>, t: Throwable) {
                 Log.e("onFailure", t.message)
+                spinkit.visibility = View.INVISIBLE
             }
 
             override fun onResponse(call: Call<ArrayList<video>>, response: Response<ArrayList<video>>) {
+                spinkit.visibility = View.INVISIBLE
                 if (response.isSuccessful) {
-
                     video_list = response.body() as ArrayList<video>
                     Log.d("isSuccessful", video_list.toString())
 
@@ -71,7 +76,18 @@ class SearchActivity : AppCompatActivity() {
         })
 
         search_btn.setOnClickListener {
+
+            var view = this.getCurrentFocus();
+            if (view != null) {
+                var imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0)
+            }
+
+            search_etxt.clearFocus()
+
+            video_adapter = VideoAdapter(video_list, applicationContext)
             video_adapter.nameFilter().filter(search_etxt.text.toString())
+
             video_recycler.layoutManager = LinearLayoutManager(this@SearchActivity, LinearLayoutManager.HORIZONTAL, false)
             video_recycler.adapter = video_adapter
         }

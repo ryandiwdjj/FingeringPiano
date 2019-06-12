@@ -22,7 +22,7 @@
                 android:layout_width="@dimen/icon_size"
                 android:layout_height="@dimen/icon_size"
                 android:background="@drawable/rounded_border"
-                android:backgroundTint="@null"
+                android:backgroundTint="@color/white"
                 android:src="@drawable/ic_back"/>
 
         <LinearLayout
@@ -34,7 +34,7 @@
                 android:layout_toEndOf="@+id/user_btn">
 
             <EditText android:id="@+id/search_etxt"
-                    android:layout_width="300dp"
+                      android:layout_width="300dp"
                       android:layout_height="wrap_content"
                       android:imeOptions="flagNoExtractUi"
                       android:gravity="center"
@@ -53,11 +53,10 @@
                 android:layout_marginStart="0dp"/>
     </LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:gravity="center">
 
         <android.support.v7.widget.RecyclerView
                 android:id="@+id/video_recycler"
@@ -65,6 +64,16 @@
                 android:layout_height="wrap_content">
         </android.support.v7.widget.RecyclerView>
 
-    </LinearLayout>
+        <com.github.ybq.android.spinkit.SpinKitView
+                android:id="@+id/spin_kit"
+                style="@style/SpinKitView.Small.Wave"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center|center_horizontal"
+                app:SpinKit_Color="@color/colorAccent"/>
+
+    </RelativeLayout>
 
 </LinearLayout>
