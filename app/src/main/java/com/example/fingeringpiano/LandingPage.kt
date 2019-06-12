@@ -35,6 +35,7 @@ class LandingPage : AppCompatActivity() {
             }
             catch (e: Throwable) {
                 var ed: SharedPreferences.Editor = sp.edit()
+                ed.putString("video", "null")
                 ed.putString("token", "null")
                 ed.putInt("id_user", 0)
                 ed.apply()

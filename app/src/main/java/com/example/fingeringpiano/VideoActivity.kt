@@ -10,6 +10,8 @@ import android.widget.MediaController
 import android.widget.Toast
 import android.widget.VideoView
 import android.app.Activity
+import android.content.Context
+import android.util.Log
 import android.view.KeyEvent
 import android.view.KeyEvent.KEYCODE_BACK
 
@@ -23,6 +25,7 @@ class VideoActivity : AppCompatActivity() {
         setContentView(R.layout.activity_video)
 
         var url = intent.getStringExtra("video")
+        var sp  = getSharedPreferences("login", Context.MODE_PRIVATE)
 
         var video_view = findViewById<VideoView>(R.id.video_view)
 
@@ -35,6 +38,8 @@ class VideoActivity : AppCompatActivity() {
 
         video_view.setOnCompletionListener {
             Toast.makeText(applicationContext, "Video sudah selesai", Toast.LENGTH_LONG).show()
+            sp.edit().putString("video", "null").apply()
+            Log.d("after video",sp.getString("video", null))
         }
     }
 }

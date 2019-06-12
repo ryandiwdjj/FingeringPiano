@@ -130,12 +130,26 @@ class MainActivity : AppCompatActivity() {
         video_recycler.addOnItemClickListener(object: onItemClickListener {
             override fun onItemClicked(position: Int, view: View) {
                 // Your logic
-                Log.d("recycler clicked", video_list.get(position).name)
+                var sp  = getSharedPreferences("login", Context.MODE_PRIVATE)
 
-                var i = Intent(this@MainActivity, VideoActivity::class.java)
-                i.putExtra("video", video_list.get(position).fileUrl)
+                Log.d("video name",sp.getString("video", null))
 
-                startActivity(i)
+                if(sp.getString("video", null).equals(video_list.get(position).name) ||
+                    sp.getString("video", null).equals("null")) {
+
+                    var i = Intent(this@MainActivity, VideoActivity::class.java)
+                    i.putExtra("video", video_list.get(position).fileUrl)
+
+                    sp.edit().putString("video", video_list.get(position).name).apply()
+
+                    Log.d("video edited",sp.getString("video", null))
+                    startActivity(i)
+                }
+                else {
+                    Toast.makeText(applicationContext,
+                        "Video" + sp.getString("video ", null) + " belum selesai ditonton",
+                        Toast.LENGTH_LONG).show()
+                }
             }
         })
 
