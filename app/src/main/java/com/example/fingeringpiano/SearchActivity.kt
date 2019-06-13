@@ -47,6 +47,7 @@ class SearchActivity : AppCompatActivity() {
             finish()
         }
 
+        search_etxt.requestFocus()
 
         var token = "bearer" + sp.getString("token", null)
         Log.d("tag", token)
@@ -61,13 +62,14 @@ class SearchActivity : AppCompatActivity() {
             override fun onResponse(call: Call<ArrayList<video>>, response: Response<ArrayList<video>>) {
                 spinkit.visibility = View.INVISIBLE
                 if (response.isSuccessful) {
+
                     video_list = response.body() as ArrayList<video>
                     Log.d("isSuccessful", video_list.toString())
 
 //                    video_recycler.layoutManager = LinearLayoutManager(this@MainActivity)
-                    video_recycler.layoutManager = LinearLayoutManager(this@SearchActivity, LinearLayoutManager.HORIZONTAL, false)
-                    video_adapter = VideoAdapter(video_list, applicationContext)
-                    video_recycler.adapter = video_adapter
+//                    video_recycler.layoutManager = LinearLayoutManager(this@SearchActivity, LinearLayoutManager.HORIZONTAL, false)
+//                    video_adapter = VideoAdapter(video_list, applicationContext)
+//                    video_recycler.adapter = video_adapter
                 }
                 else {
                     Log.d("isFailure", response.message())

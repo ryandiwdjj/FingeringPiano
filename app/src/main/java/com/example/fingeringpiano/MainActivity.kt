@@ -47,6 +47,7 @@ class MainActivity : AppCompatActivity() {
         //login token handler
         var login_token = "null"
         var sp  = getSharedPreferences("login", Context.MODE_PRIVATE)
+        var video_sp  = getSharedPreferences("video", Context.MODE_PRIVATE)
 
         var user_btn = findViewById<ImageButton>(R.id.user_btn)
         user_btn.setOnClickListener {
@@ -130,24 +131,23 @@ class MainActivity : AppCompatActivity() {
         video_recycler.addOnItemClickListener(object: onItemClickListener {
             override fun onItemClicked(position: Int, view: View) {
                 // Your logic
-                var sp  = getSharedPreferences("login", Context.MODE_PRIVATE)
+                Log.d("video id",video_sp.getString("id", null))
+                Log.d("video name",video_sp.getString("name", null))
 
-                Log.d("video name",sp.getString("video", null))
-
-                if(sp.getString("video", null).equals(video_list.get(position).name) ||
-                    sp.getString("video", null).equals("null")) {
+                if(video_sp.getString("id", null).equals(video_list.get(position).fileId) ||
+                    video_sp.getString("id", null).equals("null")) {
 
                     var i = Intent(this@MainActivity, VideoActivity::class.java)
                     i.putExtra("video", video_list.get(position).fileUrl)
 
-                    sp.edit().putString("video", video_list.get(position).name).apply()
+                    video_sp.edit().putString("id", video_list.get(position).fileId).apply()
+                    video_sp.edit().putString("name", video_list.get(position).name).apply()
 
-                    Log.d("video edited",sp.getString("video", null))
                     startActivity(i)
                 }
                 else {
                     Toast.makeText(applicationContext,
-                        "Video" + sp.getString("video ", null) + " belum selesai ditonton",
+                        "Video" + video_sp.getString("name ", null) + " belum selesai ditonton",
                         Toast.LENGTH_LONG).show()
                 }
             }

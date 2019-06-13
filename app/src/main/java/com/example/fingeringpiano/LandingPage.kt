@@ -18,6 +18,7 @@ class LandingPage : AppCompatActivity() {
         //login token handler
         var login_token: String = "null"
         var sp  = getSharedPreferences("login", Context.MODE_PRIVATE)
+        var video_sp  = getSharedPreferences("video", Context.MODE_PRIVATE)
 
         Timer().schedule(500){
 
@@ -39,6 +40,11 @@ class LandingPage : AppCompatActivity() {
                 ed.putString("token", "null")
                 ed.putInt("id_user", 0)
                 ed.apply()
+
+                var video_ed: SharedPreferences.Editor = video_sp.edit()
+                video_ed.putString("id", "null")
+                video_ed.putString("name", "null")
+                video_ed.apply()
 
                 login_token = sp.getString("token", null)
 

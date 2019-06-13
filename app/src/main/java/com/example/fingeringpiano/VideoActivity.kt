@@ -25,7 +25,7 @@ class VideoActivity : AppCompatActivity() {
         setContentView(R.layout.activity_video)
 
         var url = intent.getStringExtra("video")
-        var sp  = getSharedPreferences("login", Context.MODE_PRIVATE)
+        var vide_sp  = getSharedPreferences("video", Context.MODE_PRIVATE)
 
         var video_view = findViewById<VideoView>(R.id.video_view)
 
@@ -38,8 +38,10 @@ class VideoActivity : AppCompatActivity() {
 
         video_view.setOnCompletionListener {
             Toast.makeText(applicationContext, "Video sudah selesai", Toast.LENGTH_LONG).show()
-            sp.edit().putString("video", "null").apply()
-            Log.d("after video",sp.getString("video", null))
+            vide_sp.edit().putString("id", "null").apply()
+            vide_sp.edit().putString("name", "null").apply()
+
+            Log.d("after video",vide_sp.getString("name", null))
         }
     }
 }
