@@ -17,6 +17,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.Toast
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -28,6 +29,7 @@ class SearchActivity : AppCompatActivity() {
         setContentView(R.layout.activity_search)
 
         var sp  = getSharedPreferences("login", Context.MODE_PRIVATE)
+        var video_sp  = getSharedPreferences("video", Context.MODE_PRIVATE)
         var back_btn = findViewById<ImageButton>(R.id.back_btn)
         var search_etxt = findViewById<EditText>(R.id.search_etxt)
         var search_btn = findViewById<ImageButton>(R.id.search_btn)
@@ -97,12 +99,25 @@ class SearchActivity : AppCompatActivity() {
         video_recycler.addOnItemClickListener(object: onItemClickListener {
             override fun onItemClicked(position: Int, view: View) {
                 // Your logic
-                Log.d("recycler clicked", video_list.get(position).name)
+                Log.d("video id",video_sp.getString("id", null))
+                Log.d("video name",video_sp.getString("name", null))
 
-                var i = Intent(this@SearchActivity, VideoActivity::class.java)
-                i.putExtra("video", video_list.get(position).fileUrl)
+                if(video_sp.getString("id", null).equals(video_list.get(position).fileId) ||
+                    video_sp.getString("id", null).equals("null")) {
 
-                startActivity(i)
+                    var i = Intent(this@SearchActivity, VideoActivity::class.java)
+                    i.putExtra("video", video_list.get(position).fileUrl)
+
+                    video_sp.edit().putString("id", video_list.get(position).fileId).apply()
+                    video_sp.edit().putString("name", video_list.get(position).name).apply()
+
+                    startActivity(i)
+                }
+                else {
+                    Toast.makeText(applicationContext,
+                        "Video" + video_sp.getString("name ", null) + " belum selesai ditonton",
+                        Toast.LENGTH_LONG).show()
+                }
             }
         })
     }
