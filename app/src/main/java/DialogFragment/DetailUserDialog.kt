@@ -23,6 +23,7 @@ import android.widget.Toast
 import com.example.fingeringpiano.LandingPage
 import com.example.fingeringpiano.LoginActivity
 import com.example.fingeringpiano.R
+import com.example.fingeringpiano.UpdateProfileActivity
 import kotlinx.android.synthetic.main.dialog_detailuser.*
 import retrofit2.Call
 import retrofit2.Response
@@ -42,6 +43,7 @@ class DetailUserDialog : DialogFragment() {
 
         var email_etxt = v.findViewById(R.id.email_etxt) as EditText
         var name_etxt = v.findViewById(R.id.name_etxt) as EditText
+        var edit_btn = v.findViewById<Button>(R.id.edit_btn)
         email_etxt.isEnabled = false
         name_etxt.isEnabled = false
 
@@ -90,11 +92,15 @@ class DetailUserDialog : DialogFragment() {
             activity?.finish()
         }
 
+        edit_btn.setOnClickListener {
+            startActivity(Intent(context, UpdateProfileActivity::class.java))
+        }
+
         return v
     }
 
     override fun onResume() {
-        dialog?.window?.setLayout((LinearLayout.LayoutParams.MATCH_PARENT + 1250), (LinearLayout.LayoutParams.MATCH_PARENT + 1000))
+        dialog?.window?.setLayout((LinearLayout.LayoutParams.WRAP_CONTENT), (LinearLayout.LayoutParams.WRAP_CONTENT))
 
         super.onResume()
     }

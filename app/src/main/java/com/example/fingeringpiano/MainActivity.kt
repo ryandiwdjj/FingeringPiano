@@ -27,6 +27,8 @@ import android.widget.*
 import com.github.ybq.android.spinkit.SpinKitView
 import org.json.JSONArray
 import org.json.JSONObject
+import android.content.DialogInterface
+import android.support.v7.app.AlertDialog
 
 
 class MainActivity : AppCompatActivity() {
@@ -179,6 +181,20 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onBackPressed() {
+        val builder = AlertDialog.Builder(this@MainActivity)
+        builder.setTitle("Anda yakin ingin keluar?")
+
+        builder.setNegativeButton("Tidak", { dialog, which -> })
+
+        builder.setPositiveButton("Ya", { dialog, which ->
+            finish()
+            System.exit(0)
+            //                    MainActivity.super.onBackPressed();
+        })
+        builder.show()
     }
 }
 
