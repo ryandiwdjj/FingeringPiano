@@ -36,9 +36,9 @@ interface UserInterface {
     @FormUrlEncoded
     @POST("user/update/{id}")
     fun updateUser(@Path("id")id: Int,
+                   @Header("Authorization") authHeader: String,
                    @Field("name")name: String,
                    @Field("email")email: String,
-                   @Field("password")password: String,
                    @Field("dateOfbirth")dataOfbirth: String,
                    @Field("address")address: String,
                    @Field("gender")gender: String,

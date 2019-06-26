@@ -5,6 +5,8 @@ class user {
     var name: String = "null"
     var email: String = "null"
     var password: String = "null"
+    var detail: detailUser =
+        detailUser("null", "null", "null", "null", "null", 0)
 
     constructor(id: Int,
                 name: String,
@@ -18,7 +20,6 @@ class user {
 }
 
 class detailUser {
-    var user: user = user(0,"null", "null", "null")
     var dateofbirth: String = "null"
     var address: String = "null"
     var gender: String = "null"
@@ -26,15 +27,13 @@ class detailUser {
     var city: String = "null"
     var role_id: Int = 0
 
-    constructor(user: user,
-                dateofbirth: String,
+    constructor(dateofbirth: String,
                 address: String,
                 gender: String,
                 phoneNumber: String,
                 city: String,
                 role_id: Int
     ) {
-        this.user = user
         this.dateofbirth = dateofbirth
         this.address = address
         this.gender = gender

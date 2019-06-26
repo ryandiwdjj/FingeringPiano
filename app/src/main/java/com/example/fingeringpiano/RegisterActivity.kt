@@ -15,7 +15,14 @@ import android.util.Log
 import android.view.View
 import android.widget.*
 import com.github.ybq.android.spinkit.SpinKitView
+import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.activity_update_profile.*
+import kotlinx.android.synthetic.main.activity_update_profile.address_etxt
+import kotlinx.android.synthetic.main.activity_update_profile.birthday_etxt
+import kotlinx.android.synthetic.main.activity_update_profile.city_etxt
+import kotlinx.android.synthetic.main.activity_update_profile.email_etxt
+import kotlinx.android.synthetic.main.activity_update_profile.name_etxt
+import kotlinx.android.synthetic.main.activity_update_profile.phone_etxt
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

@@ -11,6 +11,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
+import android.support.v7.app.AlertDialog
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -80,16 +81,27 @@ class DetailUserDialog : DialogFragment() {
 
         var logout_btn = v.findViewById<Button>(R.id.logout_btn)
         logout_btn.setOnClickListener {
-            var ed: SharedPreferences.Editor = sp.edit()
-            ed.putString("token", "null")
-            ed.apply()
 
-            login_token = sp.getString("token", null)
+            var builder = context?.let { it1 -> AlertDialog.Builder(it1) }
+            builder?.setTitle("Anda yakin ingin logout?")
 
-            Toast.makeText(context, "Berhasil Logout!", Toast.LENGTH_LONG).show()
+            ?.setNegativeButton("Tidak", { dialog, which -> })
 
-            startActivity(Intent(context, LandingPage::class.java))
-            activity?.finish()
+            ?.setPositiveButton("Ya", { dialog, which ->
+                var ed: SharedPreferences.Editor = sp.edit()
+                ed.putString("token", "null")
+                ed.apply()
+
+                login_token = sp.getString("token", null)
+
+                Toast.makeText(context, "Berhasil Logout!", Toast.LENGTH_LONG).show()
+
+                startActivity(Intent(context, LandingPage::class.java))
+                activity?.finish()
+            })
+            ?.show()
+
+
         }
 
         edit_btn.setOnClickListener {
