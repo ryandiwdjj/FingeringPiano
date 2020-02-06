@@ -2,10 +2,10 @@ package com.example.fingeringpiano
 
 import API.ApiClient
 import API.VideoInterface
-import Models.video
-import RecyclerAdapter.VideoAdapter
-import RecyclerAdapter.addOnItemClickListener
-import RecyclerAdapter.onItemClickListener
+import com.example.fingeringpiano.Models.video
+import com.example.fingeringpiano.RecyclerAdapter.VideoAdapter
+import com.example.fingeringpiano.RecyclerAdapter.addOnItemClickListener
+import com.example.fingeringpiano.RecyclerAdapter.onItemClickListener
 import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity

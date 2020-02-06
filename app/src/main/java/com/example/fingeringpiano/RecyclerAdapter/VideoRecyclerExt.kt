@@ -1,8 +1,7 @@
-package RecyclerAdapter
+package com.example.fingeringpiano.RecyclerAdapter
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import android.widget.AdapterView
 
 interface onItemClickListener {
     fun onItemClicked(position: Int, view: View)

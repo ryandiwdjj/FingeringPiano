@@ -1,20 +1,18 @@
 package com.example.fingeringpiano
 
 import API.ApiClient
-import API.UserInterface
 import API.VideoInterface
-import DialogFragment.DetailUserDialog
-import Models.category
+import com.example.fingeringpiano.DialogFragment.DetailUserDialog
+import com.example.fingeringpiano.Models.category
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import Models.video
-import RecyclerAdapter.VideoAdapter
-import RecyclerAdapter.addOnItemClickListener
-import RecyclerAdapter.onItemClickListener
+import com.example.fingeringpiano.Models.video
+import com.example.fingeringpiano.RecyclerAdapter.VideoAdapter
+import com.example.fingeringpiano.RecyclerAdapter.addOnItemClickListener
+import com.example.fingeringpiano.RecyclerAdapter.onItemClickListener
 import android.content.Context
 import android.content.Intent
-import android.nfc.Tag
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import retrofit2.Call
@@ -24,10 +22,6 @@ import android.support.v7.widget.DefaultItemAnimator
 import android.view.Gravity
 import android.view.View
 import android.widget.*
-import com.github.ybq.android.spinkit.SpinKitView
-import org.json.JSONArray
-import org.json.JSONObject
-import android.content.DialogInterface
 import android.support.v7.app.AlertDialog
 
 
@@ -157,7 +151,7 @@ class MainActivity : AppCompatActivity() {
 
         ////////////////////////////////////////////////////////////////////////////////////////////////
 
-        category_spinner.adapter = ArrayAdapter(this, R.layout.spinner_item, category_list)
+        category_spinner.adapter = ArrayAdapter(this, R.layout.spinner_item, category_list) as SpinnerAdapter?
         category_spinner.gravity = Gravity.CENTER
         category_spinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {

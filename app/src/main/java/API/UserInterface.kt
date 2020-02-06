@@ -1,11 +1,9 @@
 package API
 
-import Models.login
-import Models.user
-import Models.video
+import com.example.fingeringpiano.Models.login
+import com.example.fingeringpiano.Models.user
 import retrofit2.Call
 import retrofit2.http.*
-import java.util.*
 
 interface UserInterface {
 

@@ -5,7 +5,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient{
-    private val BASE_URL: String = "http://fingeringapi.thekingcorp.org/"
+    private val BASE_URL: String = "https://api.fingeringpiano.com/"
 
     fun getThumbnail(): String {
         return BASE_URL + "images/thumbnails/"

@@ -49,6 +49,7 @@
 
                 <android.support.design.widget.TextInputEditText
                         android:id="@+id/email_etxt"
+                        android:layout_marginTop="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:imeOptions="flagNoExtractUi"
@@ -59,6 +60,7 @@
 
             <android.support.design.widget.TextInputLayout
                     android:id="@+id/calendar_etxt_layout"
+                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:imeOptions="flagNoExtractUi">
@@ -76,6 +78,7 @@
 
             <android.support.design.widget.TextInputLayout
                     android:id="@+id/address_etxt_layout"
+                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:imeOptions="flagNoExtractUi">
@@ -92,7 +95,7 @@
             <LinearLayout android:layout_width="match_parent"
                           android:layout_height="wrap_content"
                           android:layout_marginBottom="10dp"
-                          android:layout_marginTop="10dp">
+                          android:layout_marginTop="20dp">
 
                 <RadioGroup android:id="@+id/radioGender"
                             android:orientation="vertical"
@@ -115,6 +118,7 @@
 
             <android.support.design.widget.TextInputLayout
                     android:id="@+id/phone_etxt_layout"
+                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:imeOptions="flagNoExtractUi">
@@ -130,6 +134,7 @@
 
             <android.support.design.widget.TextInputLayout
                     android:id="@+id/city_etxt_layout"
+                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:imeOptions="flagNoExtractUi">

@@ -2,7 +2,7 @@ package com.example.fingeringpiano
 
 import API.ApiClient
 import API.UserInterface
-import Models.login
+import com.example.fingeringpiano.Models.login
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -33,8 +33,8 @@ class LoginActivity : AppCompatActivity() {
 
         spin_kit.visibility = View.INVISIBLE
 
-        email_etxt.setText("student@app.com")
-        password_etxt.setText("password")
+        email_etxt.setText("asdf@qwerty.com")
+        password_etxt.setText("asdf")
 
 
         regis_btn.setOnClickListener {
@@ -63,6 +63,8 @@ class LoginActivity : AppCompatActivity() {
                     password_etxt.isEnabled = true
                     login_btn.isEnabled = true
                     regis_btn.isEnabled = true
+
+                    spin_kit.visibility = View.INVISIBLE
                 }
 
                 override fun onResponse(call: Call<login>, response: Response<login>) {
@@ -84,8 +86,9 @@ class LoginActivity : AppCompatActivity() {
                         Toast.makeText(applicationContext, response.message(), Toast.LENGTH_LONG).show()
                         Log.e("isFailure", response.toString())
 
-                        spin_kit.visibility = View.INVISIBLE
                     }
+
+                    spin_kit.visibility = View.INVISIBLE
 
                     email_etxt.isEnabled = true
                     password_etxt.isEnabled = true

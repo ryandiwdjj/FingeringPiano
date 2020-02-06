@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:padding="80dp"
+                android:padding="40dp"
                 android:background="@drawable/rounded_border"
                 android:backgroundTint="@color/broken_white"
                 android:layout_width="match_parent"
@@ -41,12 +41,18 @@
             <Button android:id="@+id/edit_btn"
                     android:layout_width="@dimen/button_size"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/ripple_effect"
+                    android:backgroundTint="@color/trueBlue"
+                    android:textColor="@color/broken_white"
                     android:layout_gravity="center"
                     android:text="Ubah"/>
 
             <Button android:id="@+id/logout_btn"
                     android:layout_marginLeft="50dp"
                     android:layout_width="@dimen/button_size"
+                    android:background="@drawable/ripple_effect"
+                    android:backgroundTint="@color/trueRed"
+                    android:textColor="@color/broken_white"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="Log out"/>

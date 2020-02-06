@@ -12,4 +12,7 @@
     <color name="black">#000000</color>
     <color name="broken_white">#DDD</color>
 
+    <!--new theme-->
+    <color name="new_blue">#2A3FB2</color>
+
 </resources>

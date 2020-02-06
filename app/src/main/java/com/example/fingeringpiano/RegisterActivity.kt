@@ -2,10 +2,9 @@ package com.example.fingeringpiano
 
 import API.ApiClient
 import API.UserInterface
-import Models.login
+import com.example.fingeringpiano.Models.login
 import android.app.DatePickerDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.support.v7.app.AppCompatActivity
@@ -16,7 +15,6 @@ import android.view.View
 import android.widget.*
 import com.github.ybq.android.spinkit.SpinKitView
 import kotlinx.android.synthetic.main.activity_register.*
-import kotlinx.android.synthetic.main.activity_update_profile.*
 import kotlinx.android.synthetic.main.activity_update_profile.address_etxt
 import kotlinx.android.synthetic.main.activity_update_profile.birthday_etxt
 import kotlinx.android.synthetic.main.activity_update_profile.city_etxt
@@ -28,7 +26,6 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.concurrent.schedule
 
 class RegisterActivity : AppCompatActivity() {
     var apiInterface = ApiClient.getApiClient().create(UserInterface::class.java)
@@ -246,4 +243,5 @@ class RegisterActivity : AppCompatActivity() {
 
         birthday_etxt.setText(dateFormat.format(myCalendar.time))
     }
+
 }

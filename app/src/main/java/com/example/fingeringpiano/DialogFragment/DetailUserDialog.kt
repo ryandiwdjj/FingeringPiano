@@ -1,9 +1,8 @@
-package DialogFragment
+package com.example.fingeringpiano.DialogFragment
 
 import API.ApiClient
 import API.UserInterface
-import Models.login
-import Models.user
+import com.example.fingeringpiano.Models.user
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -22,10 +21,8 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Toast
 import com.example.fingeringpiano.LandingPage
-import com.example.fingeringpiano.LoginActivity
 import com.example.fingeringpiano.R
 import com.example.fingeringpiano.UpdateProfileActivity
-import kotlinx.android.synthetic.main.dialog_detailuser.*
 import retrofit2.Call
 import retrofit2.Response
 
@@ -38,8 +35,8 @@ class DetailUserDialog : DialogFragment() {
 
         //make dialog fragment rounded and transparent
         if (getDialog() != null && getDialog().getWindow() != null) {
-            getDialog().getWindow().setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
-            getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+            getDialog().getWindow().setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE)
         }
 
         var email_etxt = v.findViewById(R.id.email_etxt) as EditText

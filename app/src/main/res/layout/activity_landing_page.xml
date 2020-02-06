@@ -6,11 +6,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
+        android:background="@color/broken_white"
         android:orientation="vertical"
         tools:context=".LandingPage">
 
-    <ImageView android:layout_width="@dimen/icon_size"
-               android:layout_height="@dimen/icon_size"
-    android:src="@drawable/ic_notes_yellow"/>
+    <ImageView android:layout_width="100dp"
+               android:layout_height="100dp"
+               android:src="@drawable/piano"/>
+
+    <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="10dp"
+              android:textSize="@dimen/heading"
+              android:text="@string/app_name"/>
 
 </LinearLayout>

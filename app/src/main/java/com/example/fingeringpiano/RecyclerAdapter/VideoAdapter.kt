@@ -1,18 +1,14 @@
-package RecyclerAdapter
+package com.example.fingeringpiano.RecyclerAdapter
 
-import Models.video
+import com.example.fingeringpiano.Models.video
 import API.ApiClient
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Color
-import android.provider.MediaStore
-import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.Filter
 import android.widget.ImageView
 import android.widget.TextView
