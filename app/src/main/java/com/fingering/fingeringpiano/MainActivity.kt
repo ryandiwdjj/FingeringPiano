@@ -1,16 +1,16 @@
-package com.example.fingeringpiano
+package com.fingering.fingeringpiano
 
-import API.ApiClient
-import API.VideoInterface
-import com.example.fingeringpiano.DialogFragment.DetailUserDialog
-import com.example.fingeringpiano.Models.category
+import com.fingering.fingeringpiano.API.ApiClient
+import com.fingering.fingeringpiano.API.VideoInterface
+import com.fingering.fingeringpiano.DialogFragment.DetailUserDialog
+import com.fingering.fingeringpiano.Models.category
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.example.fingeringpiano.Models.video
-import com.example.fingeringpiano.RecyclerAdapter.VideoAdapter
-import com.example.fingeringpiano.RecyclerAdapter.addOnItemClickListener
-import com.example.fingeringpiano.RecyclerAdapter.onItemClickListener
+import com.fingering.fingeringpiano.Models.video
+import com.fingering.fingeringpiano.RecyclerAdapter.VideoAdapter
+import com.fingering.fingeringpiano.RecyclerAdapter.addOnItemClickListener
+import com.fingering.fingeringpiano.RecyclerAdapter.onItemClickListener
 import android.content.Context
 import android.content.Intent
 import android.support.v7.widget.LinearLayoutManager
@@ -33,7 +33,8 @@ class MainActivity : AppCompatActivity() {
 
         var fm = supportFragmentManager
         var video_list  = ArrayList<video>()
-        var apiInterface = ApiClient.getApiClient().create(VideoInterface::class.java)
+        var apiInterface = ApiClient.getApiClient().create(
+            VideoInterface::class.java)
         var video_recycler = findViewById<RecyclerView>(R.id.video_recycler)
         var video_adapter = VideoAdapter(video_list, applicationContext)
 
@@ -61,7 +62,7 @@ class MainActivity : AppCompatActivity() {
         var category_list = arrayListOf("Semua")
 
         var category_spinner = findViewById<Spinner>(R.id.category_spinner)
-        var call_cat = apiInterface.indexCategory("bearer" + sp.getString("token", null))
+        var call_cat = apiInterface.indexCategory("Bearer " + sp.getString("token", null))
         call_cat.enqueue(object : Callback<ArrayList<category>>{
             override fun onFailure(call: Call<ArrayList<category>>, t: Throwable) {
                 Log.e("onFailure", t.message)
@@ -97,7 +98,7 @@ class MainActivity : AppCompatActivity() {
         video_recycler.itemAnimator = DefaultItemAnimator()
         video_recycler.adapter = VideoAdapter(video_list, applicationContext)
 
-        var token = "bearer" + sp.getString("token", null)
+        var token = "Bearer " + sp.getString("token", null)
         Log.d("tag", token)
 
         var call = apiInterface.indexVideo(token)
@@ -143,7 +144,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 else {
                     Toast.makeText(applicationContext,
-                        "Video" + video_sp.getString("name ", null) + " belum selesai ditonton",
+                        "Video " + video_sp.getString("name", null) + " belum selesai ditonton",
                         Toast.LENGTH_LONG).show()
                 }
             }

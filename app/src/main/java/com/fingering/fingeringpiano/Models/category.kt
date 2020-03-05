@@ -1,4 +1,4 @@
-package com.example.fingeringpiano.Models
+package com.fingering.fingeringpiano.Models
 
 class category {
     var id: Int = 0

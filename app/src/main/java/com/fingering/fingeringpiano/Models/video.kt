@@ -1,4 +1,4 @@
-package com.example.fingeringpiano.Models
+package com.fingering.fingeringpiano.Models
 
 class video {
     var id: Int = 0
@@ -7,7 +7,7 @@ class video {
     var fileId: String = "null"
     var thumbnail: String = "null"
     var category_id: Int = 0
-    var category = com.example.fingeringpiano.Models.category(category_id)
+    var category = com.fingering.fingeringpiano.Models.category(category_id)
 
 
     constructor(id: Int, name: String, fileUrl: String, fileId: String, thumbnail: String, category_id: Int) {

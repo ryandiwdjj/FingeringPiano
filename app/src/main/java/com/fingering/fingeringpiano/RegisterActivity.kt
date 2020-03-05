@@ -1,8 +1,8 @@
-package com.example.fingeringpiano
+package com.fingering.fingeringpiano
 
-import API.ApiClient
-import API.UserInterface
-import com.example.fingeringpiano.Models.login
+import com.fingering.fingeringpiano.API.ApiClient
+import com.fingering.fingeringpiano.API.UserInterface
+import com.fingering.fingeringpiano.Models.login
 import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
@@ -28,14 +28,16 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class RegisterActivity : AppCompatActivity() {
-    var apiInterface = ApiClient.getApiClient().create(UserInterface::class.java)
+    var apiInterface = ApiClient.getApiClient().create(
+        UserInterface::class.java)
     var myCalendar = Calendar.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        var apiInterface = ApiClient.getApiClient().create(UserInterface::class.java)
+        var apiInterface = ApiClient.getApiClient().create(
+            UserInterface::class.java)
         var myCalendar = Calendar.getInstance()
 
         var name_etxt = findViewById<EditText>(R.id.name_etxt)
@@ -55,7 +57,13 @@ class RegisterActivity : AppCompatActivity() {
             myCalendar.set(Calendar.YEAR, year)
             myCalendar.set(Calendar.MONTH, month)
             myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-            updateLabel()
+
+            var myFormat = "yyyy-MM-dd"
+            var dateFormat = SimpleDateFormat(myFormat, Locale.US)
+
+//            Toast.makeText(applicationContext, dateFormat.format(myCalendar.time) , Toast.LENGTH_LONG).show()
+
+            birthday_etxt.setText(dateFormat.format(myCalendar.time))
         }
 
         birthday_etxt.setOnClickListener {
@@ -169,7 +177,10 @@ class RegisterActivity : AppCompatActivity() {
 
                 call.enqueue(object : Callback<login> {
                     override fun onFailure(call: Call<login>, t: Throwable) {
-                        Toast.makeText(applicationContext, t.message, Toast.LENGTH_LONG).show()
+                        Toast.makeText(applicationContext,
+                        "Terjadi kesalahan saat memasukkan data,pastikan email anda sudah benar dan blm pernah terdaftar sebelumnya"
+                        , Toast.LENGTH_LONG).show()
+
                         Log.e("onFailure", t.message)
 
                         name_etxt.isEnabled = true
@@ -205,7 +216,9 @@ class RegisterActivity : AppCompatActivity() {
                             startActivity(Intent(applicationContext, MainActivity::class.java))
                             finish()
                         } else {
-                            Toast.makeText(applicationContext, response.message(), Toast.LENGTH_LONG).show()
+                            Toast.makeText(applicationContext,
+                                "Terjadi kesalahan saat memasukkan data,pastikan email anda sudah benar dan blm pernah terdaftar sebelumnya"
+                                , Toast.LENGTH_LONG).show()
                             Log.e("isFailure", response.toString())
 
                             name_etxt.isEnabled = true
@@ -235,13 +248,6 @@ class RegisterActivity : AppCompatActivity() {
                 address_etxt.text.toString().trim().length == 0 ||
                 phone_etxt.text.toString().trim().length == 0 ||
                 city_etxt.text.toString().trim().length == 0
-    }
-
-    private fun updateLabel() {
-        var myFormat = "yyyy-MM-dd"
-        var dateFormat = SimpleDateFormat(myFormat, Locale.US)
-
-        birthday_etxt.setText(dateFormat.format(myCalendar.time))
     }
 
 }

@@ -1,4 +1,4 @@
-package com.example.fingeringpiano
+package com.fingering.fingeringpiano
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4

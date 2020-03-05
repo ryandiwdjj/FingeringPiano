@@ -1,7 +1,8 @@
-package API
+package com.fingering.fingeringpiano.API
 
-import com.example.fingeringpiano.Models.login
-import com.example.fingeringpiano.Models.user
+import com.fingering.fingeringpiano.Models.login
+import com.fingering.fingeringpiano.Models.updateResponse
+import com.fingering.fingeringpiano.Models.userResponse
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -26,21 +27,19 @@ interface UserInterface {
                     @Field("password") password: String): Call<login>
 
     //show user
-//    @FormUrlEncoded
-    @GET("user/{id}/")
-    fun showUser(@Path("id") id: Int, @Header("Authorization") authHeader: String): Call<user>
+    @GET("user/")
+    fun showUser(@Header("Authorization") authHeader: String): Call<userResponse>
 
     //update user
     @FormUrlEncoded
-    @POST("user/update/{id}")
-    fun updateUser(@Path("id")id: Int,
-                   @Header("Authorization") authHeader: String,
+    @POST("updatedata")
+    fun updateUser(@Header("Authorization") authHeader: String,
                    @Field("name")name: String,
                    @Field("email")email: String,
-                   @Field("dateOfbirth")dataOfbirth: String,
+                   @Field("dateofbirth")dataofbirth: String,
                    @Field("address")address: String,
                    @Field("gender")gender: String,
                    @Field("phoneNumber")phoneNumber: String,
-                   @Field("city")city: String) :Call<user>
+                   @Field("city")city: String) :Call<updateResponse>
 
 }

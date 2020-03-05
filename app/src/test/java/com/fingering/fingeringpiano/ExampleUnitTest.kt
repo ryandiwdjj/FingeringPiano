@@ -1,4 +1,4 @@
-package com.example.fingeringpiano
+package com.fingering.fingeringpiano
 
 import org.junit.Test
 

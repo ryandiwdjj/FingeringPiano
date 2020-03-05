@@ -1,7 +1,7 @@
-package API
+package com.fingering.fingeringpiano.API
 
-import com.example.fingeringpiano.Models.category
-import com.example.fingeringpiano.Models.video
+import com.fingering.fingeringpiano.Models.category
+import com.fingering.fingeringpiano.Models.video
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Header

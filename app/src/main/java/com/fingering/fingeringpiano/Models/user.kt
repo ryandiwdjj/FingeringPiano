@@ -1,9 +1,10 @@
-package com.example.fingeringpiano.Models
+package com.fingering.fingeringpiano.Models
 
 class user {
     var id: Int = 0
     var name: String = "null"
     var email: String = "null"
+    var status: String = "null"
     var password: String = "null"
     var detail: detailUser =
         detailUser("null", "null", "null", "null", "null", 0)
@@ -11,10 +12,12 @@ class user {
     constructor(id: Int,
                 name: String,
                 email: String,
+                status: String,
                 password: String
     ) {
         this.name = name
         this.email = email
+        this.status = status
         this.password = password
     }
 }

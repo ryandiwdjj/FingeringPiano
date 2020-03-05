@@ -1,8 +1,8 @@
-package com.example.fingeringpiano
+package com.fingering.fingeringpiano
 
-import API.ApiClient
-import API.UserInterface
-import com.example.fingeringpiano.Models.login
+import com.fingering.fingeringpiano.API.ApiClient
+import com.fingering.fingeringpiano.API.UserInterface
+import com.fingering.fingeringpiano.Models.login
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -23,7 +23,8 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        var apiInterface = ApiClient.getApiClient().create(UserInterface::class.java)
+        var apiInterface = ApiClient.getApiClient().create(
+            UserInterface::class.java)
 
         val email_etxt = findViewById(R.id.email_etxt) as EditText
         val password_etxt = findViewById(R.id.password_etxt) as EditText
@@ -33,8 +34,8 @@ class LoginActivity : AppCompatActivity() {
 
         spin_kit.visibility = View.INVISIBLE
 
-        email_etxt.setText("asdf@qwerty.com")
-        password_etxt.setText("asdf")
+//        email_etxt.setText("asdf@email.com")
+//        password_etxt.setText("asdf")
 
 
         regis_btn.setOnClickListener {
@@ -79,11 +80,13 @@ class LoginActivity : AppCompatActivity() {
                         ed.putInt("id_user", response.body()!!.id)
                         ed.apply()
 
+                        Log.e("id_user", response.body()!!.id.toString())
+
                         startActivity(Intent(applicationContext, MainActivity::class.java))
                         finish()
                     }
                     else {
-                        Toast.makeText(applicationContext, response.message(), Toast.LENGTH_LONG).show()
+                        Toast.makeText(applicationContext, "Login gagal, periksa kembali email, password, dan koneksi anda", Toast.LENGTH_LONG).show()
                         Log.e("isFailure", response.toString())
 
                     }

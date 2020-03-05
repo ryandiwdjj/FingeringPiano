@@ -1,8 +1,7 @@
-package com.example.fingeringpiano
+package com.fingering.fingeringpiano
 
-import API.ApiClient
-import API.UserInterface
-import com.example.fingeringpiano.Models.user
+import com.fingering.fingeringpiano.API.ApiClient
+import com.fingering.fingeringpiano.API.UserInterface
 import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
@@ -12,6 +11,8 @@ import android.support.v7.app.AlertDialog
 import android.util.Log
 import android.view.View
 import android.widget.*
+import com.fingering.fingeringpiano.Models.updateResponse
+import com.fingering.fingeringpiano.Models.userResponse
 import kotlinx.android.synthetic.main.activity_update_profile.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -52,40 +53,40 @@ class UpdateProfileActivity : AppCompatActivity() {
         var male_radio = findViewById<RadioButton>(R.id.radioMale)
         var female_radio = findViewById<RadioButton>(R.id.radioFemale)
 
-        var apiInterface = ApiClient.getApiClient().create(UserInterface::class.java)
+        var apiInterface = ApiClient.getApiClient().create(
+            UserInterface::class.java
+        )
 
-        var sp  = getSharedPreferences("login", Context.MODE_PRIVATE)
+        var sp = getSharedPreferences("login", Context.MODE_PRIVATE)
 
-        val call = apiInterface.showUser(sp.getInt("id_user", 0) , "bearer" + sp.getString("token", null))
-        Log.d("token","bearer" + sp.getString("token", null) )
-        call.enqueue(object: retrofit2.Callback<user> {
-            override fun onFailure(call: Call<user>, t: Throwable) {
-                Log.d("onFailure", t.message.toString())
+        val call = apiInterface.showUser("Bearer " + sp.getString("token", null))
+        Log.d("token", "Bearer " + sp.getString("token", null))
+        call.enqueue(object : Callback<userResponse> {
+            override fun onFailure(call: Call<userResponse>, t: Throwable) {
+                Log.e("onFailure get user", t.message.toString())
 
                 Toast.makeText(applicationContext, t.toString(), Toast.LENGTH_LONG).show()
                 spinkit.visibility = View.INVISIBLE
             }
 
-            override fun onResponse(call: Call<user>, response: Response<user>) {
-                Log.d("onResponse", response.message().toString())
+            override fun onResponse(call: Call<userResponse>, response: Response<userResponse>) {
+                Log.d("onResponse get user", response.message().toString())
                 spinkit.visibility = View.INVISIBLE
 
-                if(response.isSuccessful){
-                    name_etxt.setText(response.body()?.name)
-                    email_etxt.setText(response.body()?.email)
-                    birthday_etxt.setText(response.body()?.detail?.dateofbirth)
-                    address_etxt.setText(response.body()?.detail?.address)
-                    if(response.body()?.detail?.gender!!.contains("L")) {
+                if (response.isSuccessful) {
+                    name_etxt.setText(response.body()?.userdata!!.name)
+                    email_etxt.setText(response.body()?.userdata!!.email)
+                    birthday_etxt.setText(response.body()?.userdata!!.detail?.dateofbirth)
+                    address_etxt.setText(response.body()?.userdata!!.detail?.address)
+                    if (response.body()?.userdata!!.detail?.gender!!.contains("L")) {
                         male_radio.performClick()
-                    }
-                    else {
+                    } else {
                         female_radio.performClick()
                     }
-                    phone_etxt.setText(response.body()?.detail?.phoneNumber)
-                    city_etxt.setText(response.body()?.detail?.city)
+                    phone_etxt.setText(response.body()?.userdata!!.detail?.phoneNumber)
+                    city_etxt.setText(response.body()?.userdata!!.detail?.city)
 
-                }
-                else {
+                } else {
                     Toast.makeText(applicationContext, response.message(), Toast.LENGTH_LONG).show()
                 }
             }
@@ -95,32 +96,31 @@ class UpdateProfileActivity : AppCompatActivity() {
             myCalendar.set(Calendar.YEAR, year)
             myCalendar.set(MONTH, month)
             myCalendar.set(DAY_OF_MONTH, dayOfMonth)
-            updateLabel()
+
+            var myFormat = "yyyy-MM-dd"
+            var dateFormat = SimpleDateFormat(myFormat, Locale.US)
+
+            birthday_etxt.setText(dateFormat.format(myCalendar.time))
         }
 
         birthday_etxt.setOnClickListener {
-            DatePickerDialog(this@UpdateProfileActivity, date, myCalendar.get(Calendar.YEAR),
-                myCalendar.get(MONTH), myCalendar.get(DAY_OF_MONTH)).show()
+            DatePickerDialog(
+                this@UpdateProfileActivity, date, myCalendar.get(Calendar.YEAR),
+                myCalendar.get(MONTH), myCalendar.get(DAY_OF_MONTH)
+            ).show()
         }
 
         var cancel_btn = findViewById<Button>(R.id.cancel_btn)
         cancel_btn.setOnClickListener {
-//            finish()
-            if(etxtIsEmpty() == true) {
-                finish()
-            }
-            else {
-                AlertDialog.Builder(applicationContext)
-                    .setTitle("Batalkan aksi")
-                    .setMessage("Anda yakin akan membatalkan aksi anda?")
-                    .setPositiveButton("Ya") { _, which ->
-                        finish()
-                    }
-                    .setNegativeButton("Tidak") { _, which ->
+            var builder = AlertDialog.Builder(this)
+            builder.setTitle("Batalkan aksi?")
+                .setPositiveButton("Ya", { dialog, which ->
+                    finish()
+                })
+                .setNegativeButton("Tidak", { dialog, which ->
 
-                    }
-                    .show()
-            }
+                })
+                .show()
         }
 
         var save_btn = findViewById<Button>(R.id.save_btn)
@@ -129,8 +129,6 @@ class UpdateProfileActivity : AppCompatActivity() {
             var radio_button = findViewById<RadioButton>(gender_radio.checkedRadioButtonId)
             var male_radio = findViewById<RadioButton>(R.id.radioMale)
             var female_radio = findViewById<RadioButton>(R.id.radioFemale)
-
-            Log.d("save_btn", "clicked")
 
             name_etxt.isEnabled = false
             email_etxt.isEnabled = false
@@ -145,7 +143,11 @@ class UpdateProfileActivity : AppCompatActivity() {
             spin_kit.visibility = View.VISIBLE
 
             if (!male_radio.isChecked && !female_radio.isChecked) {
-                Toast.makeText(applicationContext, "Jenis Kelamin belum dipilih!", Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    applicationContext,
+                    "Jenis Kelamin belum dipilih!",
+                    Toast.LENGTH_LONG
+                ).show()
 
                 name_etxt.isEnabled = true
                 email_etxt.isEnabled = true
@@ -160,7 +162,8 @@ class UpdateProfileActivity : AppCompatActivity() {
                 spin_kit.visibility = View.INVISIBLE
 
             } else if (etxtIsEmpty()) {
-                Toast.makeText(applicationContext, "Field harus terisi semua!", Toast.LENGTH_LONG).show()
+                Toast.makeText(applicationContext, "Field harus terisi semua!", Toast.LENGTH_LONG)
+                    .show()
 
                 name_etxt.isEnabled = true
                 email_etxt.isEnabled = true
@@ -177,8 +180,7 @@ class UpdateProfileActivity : AppCompatActivity() {
             } else {
 
                 val call = apiInterface.updateUser(
-                    sp.getInt("id_user", 0) ,
-                    "bearer" + sp.getString("token", null),
+                    "Bearer " + sp.getString("token", null),
                     name_etxt.text.toString(),
                     email_etxt.text.toString(),
                     birthday_etxt.text.toString(),
@@ -188,10 +190,14 @@ class UpdateProfileActivity : AppCompatActivity() {
                     city_etxt.text.toString()
                 )
 
-                call.enqueue(object : Callback<user> {
-                    override fun onFailure(call: Call<user>, t: Throwable) {
-                        Toast.makeText(applicationContext, t.message, Toast.LENGTH_LONG).show()
-                        Log.e("onFailure", t.message)
+                call.enqueue(object : Callback<updateResponse> {
+                    override fun onFailure(call: Call<updateResponse>, t: Throwable) {
+                        Toast.makeText(applicationContext,
+                            "Terjadi kesalahan saat memasukkan data,pastikan email anda sudah benar dan blm pernah terdaftar sebelumnya"
+                            , Toast.LENGTH_LONG).show()
+
+                        Log.e("onFailure update", call.toString())
+                        Log.e("onFailure update", t.localizedMessage)
 
                         name_etxt.isEnabled = true
                         email_etxt.isEnabled = true
@@ -206,13 +212,18 @@ class UpdateProfileActivity : AppCompatActivity() {
                         spin_kit.visibility = View.INVISIBLE
                     }
 
-                    override fun onResponse(call: Call<user>, response: Response<user>) {
+                    override fun onResponse(call: Call<updateResponse>, response: Response<updateResponse>) {
                         if (response.isSuccessful) {
                             startActivity(Intent(applicationContext, MainActivity::class.java))
+                            Toast.makeText(applicationContext,
+                                "Berhasil update data!", Toast.LENGTH_LONG).show()
                             finish()
                         } else {
-                            Toast.makeText(applicationContext, response.message(), Toast.LENGTH_LONG).show()
-                            Log.e("isFailure", response.toString())
+                            Toast.makeText(applicationContext,
+                                "Terjadi kesalahan saat memasukkan data,pastikan email anda sudah benar dan blm pernah terdaftar sebelumnya"
+                                , Toast.LENGTH_LONG).show()
+
+                            Log.e("isFailure on update", response.toString())
 
                             name_etxt.isEnabled = true
                             email_etxt.isEnabled = true
@@ -233,7 +244,7 @@ class UpdateProfileActivity : AppCompatActivity() {
     }
 
 
-    fun etxtIsEmpty(): Boolean{
+    fun etxtIsEmpty(): Boolean {
         return name_etxt.text.toString().trim().length == 0 ||
                 email_etxt.text.toString().trim().length == 0 ||
                 address_etxt.text.toString().trim().length == 0 ||
@@ -241,10 +252,4 @@ class UpdateProfileActivity : AppCompatActivity() {
                 city_etxt.text.toString().trim().length == 0
     }
 
-    private fun updateLabel() {
-        var myFormat = "yyyy-MM-dd"
-        var dateFormat = SimpleDateFormat(myFormat, Locale.US)
-
-        birthday_etxt.setText(dateFormat.format(myCalendar.time))
-    }
 }

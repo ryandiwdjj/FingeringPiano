@@ -1,4 +1,4 @@
-package com.example.fingeringpiano.Models
+package com.fingering.fingeringpiano.Models
 
 class login {
     var access_token: String = "null"

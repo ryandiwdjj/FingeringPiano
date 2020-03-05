@@ -1,7 +1,7 @@
-package com.example.fingeringpiano.RecyclerAdapter
+package com.fingering.fingeringpiano.RecyclerAdapter
 
-import com.example.fingeringpiano.Models.video
-import API.ApiClient
+import com.fingering.fingeringpiano.Models.video
+import com.fingering.fingeringpiano.API.ApiClient
 import android.annotation.SuppressLint
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -12,7 +12,7 @@ import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.ImageView
 import android.widget.TextView
-import com.example.fingeringpiano.R
+import com.fingering.fingeringpiano.R
 import com.github.ybq.android.spinkit.SpinKitView
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso

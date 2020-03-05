@@ -1,4 +1,4 @@
-package com.example.fingeringpiano
+package com.fingering.fingeringpiano
 
 import android.content.Context
 import android.content.Intent

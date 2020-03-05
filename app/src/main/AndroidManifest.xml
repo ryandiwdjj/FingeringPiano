@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.example.fingeringpiano">
+          package="com.fingering.fingeringpiano">
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
@@ -11,12 +11,12 @@
             android:networkSecurityConfig="@xml/network_security_config"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
-            android:theme="@style/AppTheme">
-        <activity android:name=".UpdateProfileActivity"
-                  android:screenOrientation="landscape">
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity
+                android:name="com.fingering.fingeringpiano.UpdateProfileActivity">
         </activity>
         <activity
-                android:name=".LandingPage"
+                android:name="com.fingering.fingeringpiano.LandingPage"
                 android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -25,23 +25,22 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".LoginActivity"
+                android:name="com.fingering.fingeringpiano.LoginActivity"
                 android:screenOrientation="landscape">
         </activity>
         <activity
-                android:name=".RegisterActivity"
+                android:name="com.fingering.fingeringpiano.RegisterActivity">
+        </activity>
+        <activity
+                android:name="com.fingering.fingeringpiano.VideoActivity"
                 android:screenOrientation="landscape">
         </activity>
         <activity
-                android:name=".VideoActivity"
+                android:name="com.fingering.fingeringpiano.SearchActivity"
                 android:screenOrientation="landscape">
         </activity>
         <activity
-                android:name=".SearchActivity"
-                android:screenOrientation="landscape">
-        </activity>
-        <activity
-                android:name=".MainActivity"
+                android:name="com.fingering.fingeringpiano.MainActivity"
                 android:screenOrientation="landscape">
         </activity>
     </application>

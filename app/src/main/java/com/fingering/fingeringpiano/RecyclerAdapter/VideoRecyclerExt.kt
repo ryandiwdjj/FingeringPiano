@@ -1,4 +1,4 @@
-package com.example.fingeringpiano.RecyclerAdapter
+package com.fingering.fingeringpiano.RecyclerAdapter
 
 import android.support.v7.widget.RecyclerView
 import android.view.View

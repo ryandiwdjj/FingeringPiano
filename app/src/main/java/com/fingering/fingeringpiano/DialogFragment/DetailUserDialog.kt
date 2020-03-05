@@ -1,8 +1,7 @@
-package com.example.fingeringpiano.DialogFragment
+package com.fingering.fingeringpiano.DialogFragment
 
-import API.ApiClient
-import API.UserInterface
-import com.example.fingeringpiano.Models.user
+import com.fingering.fingeringpiano.API.ApiClient
+import com.fingering.fingeringpiano.API.UserInterface
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -20,16 +19,20 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Toast
-import com.example.fingeringpiano.LandingPage
-import com.example.fingeringpiano.R
-import com.example.fingeringpiano.UpdateProfileActivity
+import com.android.volley.VolleyLog.e
+import com.fingering.fingeringpiano.LandingPage
+import com.fingering.fingeringpiano.Models.userResponse
+import com.fingering.fingeringpiano.R
+import com.fingering.fingeringpiano.UpdateProfileActivity
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
 
 class DetailUserDialog : DialogFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.dialog_detailuser, container)
-        var apiInterface = ApiClient.getApiClient().create(UserInterface::class.java)
+        var apiInterface = ApiClient.getApiClient().create(
+            UserInterface::class.java)
         var spinkit = v.findViewById<View>(R.id.spin_kit)
         spinkit.visibility = View.VISIBLE
 
@@ -49,26 +52,25 @@ class DetailUserDialog : DialogFragment() {
         var login_token: String = "null"
         var sp  = activity!!.getSharedPreferences("login", Context.MODE_PRIVATE)
 
-        Log.d("data token on detail", sp.getString("token", null))
-        Log.d("user on detail", sp.getInt("id_user", 0).toString())
-
-        val call = apiInterface.showUser(sp.getInt("id_user", 0) , "bearer" + sp.getString("token", null))
-        Log.d("token","bearer" + sp.getString("token", null) )
-        call.enqueue(object: retrofit2.Callback<user> {
-            override fun onFailure(call: Call<user>, t: Throwable) {
-                Log.d("onFailure", t.message.toString())
+        var call = apiInterface.showUser("Bearer " + sp.getString("token", null))
+        Log.e("token on detail user",sp.getString("token", null) )
+        call.enqueue(object: Callback<userResponse> {
+            override fun onFailure(call: Call<userResponse>, t: Throwable) {
+                e("onFailure", t.message.toString())
 
                 Toast.makeText(context, t.toString(), Toast.LENGTH_LONG).show()
                 spinkit.visibility = View.INVISIBLE
             }
 
-            override fun onResponse(call: Call<user>, response: Response<user>) {
-                Log.d("onResponse", response.message().toString())
+            override fun onResponse(call: Call<userResponse>, response: Response<userResponse>) {
+                Log.e("onResponse", response.body()?.role)
+//                Toast.makeText(context, response.message(), Toast.LENGTH_LONG).show()
+
                 spinkit.visibility = View.INVISIBLE
 
                 if(response.isSuccessful){
-                    name_etxt.setText(response.body()?.name)
-                    email_etxt.setText(response.body()?.email)
+                    name_etxt.setText(response.body()!!.userdata.name)
+                    email_etxt.setText(response.body()!!.userdata.email)
                 }
                 else {
                     Toast.makeText(context, response.message(), Toast.LENGTH_LONG).show()

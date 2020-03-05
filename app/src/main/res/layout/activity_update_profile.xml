@@ -106,7 +106,7 @@
                                  android:layout_width="wrap_content"
                                  android:layout_height="wrap_content"
                                  android:layout_marginBottom="5dp"
-                                 android:text="Laki - laki"/>
+                                 android:text="Laki-laki"/>
 
                     <RadioButton android:id="@+id/radioFemale"
                                  android:layout_width="wrap_content"
@@ -161,6 +161,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/rounded_border"
                         android:backgroundTint="@color/trueRed"
+                        android:textColor="@color/white"
                         android:text="Batal"/>
 
                 <Button
@@ -170,6 +171,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/rounded_border"
                         android:backgroundTint="@color/trueBlue"
+                        android:textColor="@color/white"
                         android:text="Simpan"/>
 
             </LinearLayout>

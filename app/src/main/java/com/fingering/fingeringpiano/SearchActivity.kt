@@ -1,11 +1,11 @@
-package com.example.fingeringpiano
+package com.fingering.fingeringpiano
 
-import API.ApiClient
-import API.VideoInterface
-import com.example.fingeringpiano.Models.video
-import com.example.fingeringpiano.RecyclerAdapter.VideoAdapter
-import com.example.fingeringpiano.RecyclerAdapter.addOnItemClickListener
-import com.example.fingeringpiano.RecyclerAdapter.onItemClickListener
+import com.fingering.fingeringpiano.API.ApiClient
+import com.fingering.fingeringpiano.API.VideoInterface
+import com.fingering.fingeringpiano.Models.video
+import com.fingering.fingeringpiano.RecyclerAdapter.VideoAdapter
+import com.fingering.fingeringpiano.RecyclerAdapter.addOnItemClickListener
+import com.fingering.fingeringpiano.RecyclerAdapter.onItemClickListener
 import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
@@ -33,7 +33,8 @@ class SearchActivity : AppCompatActivity() {
         var back_btn = findViewById<ImageButton>(R.id.back_btn)
         var search_etxt = findViewById<EditText>(R.id.search_etxt)
         var search_btn = findViewById<ImageButton>(R.id.search_btn)
-        var apiInterface = ApiClient.getApiClient().create(VideoInterface::class.java)
+        var apiInterface = ApiClient.getApiClient().create(
+            VideoInterface::class.java)
         var video_recycler = findViewById<RecyclerView>(R.id.video_recycler)
         var video_list  = ArrayList<video>()
         var video_adapter = VideoAdapter(video_list, applicationContext)
